@@ -1,0 +1,20 @@
+<ion-view>
+  <ion-nav-title class="font-small">
+    {{title}}
+  </ion-nav-title>
+  <ion-content id="Categories">
+    <div class="row">
+      <div class="col col-100">
+        <p class="subtitle fancy"><span>Most Searched Categories</span></p>
+      </div>
+    </div>
+    <div class="row" ng-repeat="(key,val) in categories track by $index">
+      <div ng-repeat="category in val track by $index" class="col col-33" ng-class="{1:'col-offset-33', 2:'col-offset-15', 3:''}[val.length]">
+        <a href="#/app/locations/{{params.location_id}}/{{category.id}}">
+          <img ng-src="{{serviceUrl}}/uploads/business_categories/{{category.id}}/{{category.mobile_icon_url}}" />
+          <p class="text-center">{{category.title}}</p>
+        </a>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

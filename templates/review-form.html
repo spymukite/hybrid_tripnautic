@@ -1,0 +1,57 @@
+<ion-modal-view id="Review">
+
+  <ion-header-bar class="bar-balanced">
+    <div class="buttons">
+      <img src="img/sideicon.png">
+    </div>
+    <h1 class="title font-small">Add a Review</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="doneReview()">Close</button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <form name="review-form" ng-submit="postReview()" novalidate>
+      <div class="row responsive-sm">
+        <div class="col">
+          <h1>{{reviewLocation.listing_name}}</h1>
+          <p>{{reviewLocation.address}}, {{reviewLocation.address2}}, {{reviewLocation.city}}, {{reviewLocation.state}}, {{reviewLocation.country}} {{reviewLocation.zip}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-offset-20 col-60">
+          <div class="rating" ng-click="reviewData.review_stars=1" ng-class="{hover:reviewData.review_stars >= 0.5}">
+            <span class="span">☆</span>
+          </div>
+          <div class="rating" ng-click="reviewData.review_stars=2" ng-class="{hover:reviewData.review_stars >= 1.5}">
+            <span class="span">☆</span>
+          </div>
+          <div class="rating" ng-click="reviewData.review_stars=3" ng-class="{hover:reviewData.review_stars >= 2.5}">
+            <span class="span">☆</span>
+          </div>
+          <div class="rating" ng-click="reviewData.review_stars=4" ng-class="{hover:reviewData.review_stars >= 3.5}">
+            <span class="span">☆</span>
+          </div>
+          <div class="rating" ng-click="reviewData.review_stars=5" ng-class="{hover:reviewData.review_stars >= 4.5}">
+            <span class="span">☆</span>
+          </div>
+        </div>
+      </div>
+      <div class="list list-inset">
+        <label class="item item-input">
+          <input type="text" placeholder="Full name" ng-model="reviewData.review_name" ng-required="true">
+        </label>
+        <label class="item item-input margin-top10">
+          <input type="text" placeholder="Email" ng-model="reviewData.review_email" ng-required="true">
+        </label>
+        <label class="item item-input margin-top10">
+          <textarea ng-model="reviewData.review" placeholder="Review Detail" rows="10"></textarea>
+        </label>
+        <div class="item transparent">
+          <button class="button button-block button-small button-energized" type="submit" ng-disabled="review-form.$invalid" ng-click="postReview()">
+            POST REVIEW
+          </button>
+        </div>
+      </div>
+    </form>
+  </ion-content>
+</ion-modal-view>

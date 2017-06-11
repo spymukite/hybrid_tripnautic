@@ -1,0 +1,57 @@
+<ion-view>
+  <ion-nav-buttons side="left">
+      <img src="img/sideicon.png">
+       <button ng-click="$ionicGoBack()" class="button back-button button-clear leftarrow">
+           <i class="icon ion-ios-arrow-back"></i>
+        </button>
+
+  </ion-nav-buttons>
+   
+<!-- <ion-nav-back-button class="button-clear">
+    <i class="ion-arrow-left-c"></i>BACK
+  </ion-nav-back-button>-->
+    <ion-nav-buttons side="right" class="leftnav">
+        <a href="#/app/locationslist" class="mapnavbutton listicon">
+            <i class="fa fa-bars btnicons l_icon"></i>
+        </a>
+        <a ng-click="filter()" class="button button-icon button-clear mapnavbutton">
+            Filter
+        </a>
+      </ion-nav-buttons>
+  <ion-nav-title class="font-small searchbar">
+      <label class="item item-input searchlabel">
+        <i class="icon ion-search placeholder-icon searchicon"></i>
+   <input type="text" placeholder="Search" ng-model="searchText"><a href="#/app/search/search/{{searchText}}" class="search_item locationsearch"><i class="fa fa-location-arrow placeholder-icon locationicon"></i></a>
+      </label>
+  </ion-nav-title>
+  <ion-content id="Locations" data-tap-disabled="true">
+      <div>
+          <p class="listingcount">0 listings <a href="#" ng-click="focusCurrentlocation()" class="listinglink"><span><i class="fa fa-location-arrow placeholder-icon locationicon"></i></span></a></p>
+      </div>
+<!--      <map class="google-map" center="map.center" options="map.options" events="map.events">
+
+</map>-->
+      <!--<div id="map-view" data-tap-disabled="true">-->
+      <map center="[24.6669, -81.5442]" zoom="8" disable-default-u-i="true"  class="mapview">
+           <!--<marker position="marker.position"></marker>-->
+        <marker ng-repeat="listing in position" position="[{{listing.google_latitude}},{{listing.google_longitude}}]" on-click="showInfoWindow(event, listing)" ng-if="listing.proximity_location === '0'">
+        </marker>
+           
+<!--        <shape name="circle" ng-repeat="listing in position" stroke-color="#f38421" stroke-opacity="1" stroke-weight="2" fill-color="#f38421" fill-opacity="0.0" center="[{{listing.google_latitude}},{{listing.google_longitude}}]"  ng-if="listing.proximity_location !== '0'">
+        </shape>-->
+      </map>
+    <!--</div>-->
+<!--    <ion-list>
+      <ion-item class="item-thumbnail-left item-icon-right" ng-repeat="location in locations" href="#/app/locations/{{location.id}}">
+        <img ng-src="{{serviceUrl}}/uploads/locations/{{location.id}}/{{location.mobile_icon_url}}">
+
+        <h2>{{location.city}}</h2>
+        <span class="badge badge-balanced">{{location.total_listings}}</span>
+        <i class="icon ion-chevron-right"></i>
+      </ion-item>
+    </ion-list>-->
+  </ion-content>
+<div class="bar bar-footer bar-balanced footr">
+    <img src="img/voucher.jpg" width="100%"/>
+</div>
+</ion-view>

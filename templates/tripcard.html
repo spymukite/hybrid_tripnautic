@@ -1,0 +1,158 @@
+<ion-view>
+  <ion-nav-title class="font-small">My TripCard</ion-nav-title>
+  <ion-content id="TripCardPortrait" ng-show="profile.status_text==='Active'" style="overflow-x: scroll;">
+    <div class="row">
+      <div class="col col-offset-10 col-50">
+        <img src="img/digitalTripCardHead.png">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col col-offset-10 col-75">
+          <p class="font-large">EXPIRES: <a href="#">{{profile.activation_expiration_date}}</a></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col col-offset-10">
+        <p class="font-xxlarge name">{{profile.name}}<span class="card-no">#{{profile.tripcard_no}}</span> </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col col-offset-10">
+        <p><strong>{{dateTime.day}}</strong>-{{dateTime.date}}</strong></p>
+      </div>
+    </div>
+    <div class="row big-padding">
+      <div class="col col-offset-10 col-80">
+        <p class="textp text-center text-uppercase font-xxsmall caution">this digital membership card is only valid when the<br />dots are rotating and the timestamp is accurate</p>
+      </div>
+    </div>
+    <div class="bar_image row">
+      <div class="col col-offset-20 col-60">
+          <img ng-src="{{profile.barcode_pic}}">
+        <p class="text-center caution barcode"></p>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col col-offset-10 col-80" style="display: inherit;">
+            <img ng-src="{{profile.profile_pic}}" class="prof_image">
+            <img ng-src="{{profile.qrcode_pic}}" class="qr_image">
+        <p class="text-center caution"></p>
+      </div>
+    </div>
+  </ion-content>
+  <ion-footer-bar class=" tripcard_footer bar-energized bar-tall" id="TripCardPortraitFooter" ng-show="profile.status_text==='Active'">
+    <div style="width: 100%;">
+      <div class="row">
+        <div class="col">
+          <p class="font-small text-center">{{city}} WEATHER-{{dateTime.day}},{{dateTime.date2}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-offset-20 col-20">
+            <img ng-src="{{weather.weatherIconUrl[0]['value']}}" class="w_image">
+        </div>
+        <div class="col col-20">
+          <span class="font-large">{{weather.temp_C}}</span><sup>&ordm;</sup><span class="font-small">F</span>
+        </div>
+        <div class="col col-20">
+          <span class="font-large">{{weather.windspeedMiles}}</span><span class="font-small">mph</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-100 text-center">
+          <img src="img/logo.png">
+        </div>
+      </div>
+    </div>
+  </ion-footer-bar>
+  <ion-content id="TripCardLandscape" ng-show="profile.status_text==='Active'">
+    <div class="row">
+      <div class="col col-50">
+        <div class="row">
+          <div class="col" style="height: 50px;">
+            <img src="img/digitalTripCardHead.png">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <p class="font-large">{{profile.activation}}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <p class="font-xxlarge">{{profile.name}}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <p class="font-large">{{profile.tripcard_no}}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <p class="caution" style="height: 110px;"><img ng-src="{{profile.profile_pic}}"></p>
+          </div>
+        </div>
+      </div>
+      <div class="col col-50">
+        <div class="row">
+          <div class="col">
+            <p class="font-large text-center"><strong>{{dateTime.day}}</strong>-{{dateTime.date3}}<br/>{{dateTime.date4}}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <p class="text-center caution barcode"><img ng-src="{{profile.barcode_pic}}"></p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <p class="text-center caution" style="height: 150px;"><img src="img/logoiconLarge.png"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+  <ion-footer-bar class="bar-energized bar-tall" id="TripCardLandscapeFooter" ng-show="profile.status_text==='Active'">
+    <div class="row" style="width: 100%;">
+      <div class="col col-50">
+        <img src="img/logo.png">
+      </div>
+      <div col col-50>
+        <div class="row">
+          <p class="font-small text-center caution">{{city}} WEATHER-{{dateTime.day}},{{dateTime.date2}}</p>
+        </div>
+        <div class="row">
+          <div class="col col-offset-20 col-20">
+            <img ng-src="{{weather.weatherIconUrl[0].value}}">
+          </div>
+          <div class="col col-20">
+            <span class="font-large">{{weather.temp_C}}</span><sup>&ordm;</sup><span class="font-small">F</span>
+          </div>
+          <div class="col col-20">
+            <span class="font-large">{{weather.windspeedMiles}}</span><span class="font-small">mph</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </ion-footer-bar>
+
+  <ion-content ng-show="profile.status_text !== 'Active'" class="inactive">
+    <div class="row responsive-md">
+      <div class="row responsive-md">
+        <div class="col"><h2>{{profile.text_1}}</h2></div>
+        <div class="col"><p>{{profile.text_2}}</p></div>
+        <div class="col"><p>{{profile.text_3}}</p></div>
+        <!--<div class="col"><button class="button button-energized" ng-click="openURL(profile.activation_link)">{{profile.text_4}}</button></div>-->
+      </div>
+    </div>
+  </ion-content>
+  <ion-footer-bar class="bar-energized bar-tall inactive" ng-show="profile.status_text !== 'Active'">
+    <img ng-src="{{profile.inactive_image}}" class="inactiveMermaid">
+    <div class="row responsive-md">
+      <div class="col font-small">{{profile.text_5}}</div>
+      <div class="col font-xxlarge">{{profile.text_6}}</div>
+    </div>
+  </ion-footer-bar>
+</ion-view>

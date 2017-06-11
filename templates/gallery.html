@@ -1,0 +1,22 @@
+<ion-modal-view id="Gallery">
+  <ion-content scroll="false" has-header="false">
+    <ion-slide-box show-pager="false">
+      <ion-slide class="full-span" ng-repeat="image in gallery">
+        <ion-header-bar class="bar-positive">
+          <div class="buttons button-clear">
+            {{$index + 1}}/{{gallery.length}}
+          </div>
+          <h1 class="title"></h1>
+          <div class="buttons">
+            <button class="button button-icon icon ion-qr-scanner"></button>
+            <button class="button button-icon icon ion-ios-redo" ng-click="sharePhoto()"></button>
+            <button class="button button-icon icon ion-ios-close-empty" ng-click="closeGallery()"></button>
+          </div>
+        </ion-header-bar>
+        <ion-content scroll="false">
+          <img ng-src="{{image}}" class="fullscreen-image">
+        </ion-content>
+      </ion-slide>
+    </ion-slide-box>
+  </ion-content>
+</ion-modal-view>

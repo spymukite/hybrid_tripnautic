@@ -1,0 +1,15 @@
+<div class="fixed" when-scrolled="loadMore()">
+	<ul class="table-view">
+	  <li class="table-view-cell media" ng-repeat="showList in requestData">
+		  <img class="media-object pull-left" width="52px" height="50px" src="img/icon-user.png">
+		  <div class="media-body">
+			{{ showList.comment_name }} <img ng-if="showList.total != ''" onerror="this.src='img/star/star_0.png'" ng-src="img/star/star_{{ showList.comment_rating }}.png" />
+			<p>{{ showList.comment_value }}</p>
+			<span class="badge">
+				<span am-time-ago="showList.comment_date"></span>
+			</span>	
+		  </div>
+	  </li>
+	</ul>
+	<br>
+</div>

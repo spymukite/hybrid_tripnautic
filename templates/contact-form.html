@@ -1,0 +1,37 @@
+<ion-modal-view id="Contact">
+
+  <ion-header-bar class="bar-balanced">
+    <div class="buttons">
+      <img src="img/sideicon.png">
+    </div>
+    <h1 class="title font-small">Contact TN</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closeContactForm()">Close</button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <form name="contact-form" ng-submit="send()" novalidate>
+
+      <div class="list list-inset">
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Name</span>
+          <input type="text"  ng-model="contactData.contact_name" required>
+        </label>
+        <label class="item  item-input item-stacked-label margin-top10">
+          <span class="input-label">Email</span>
+          <input type="text"  ng-model="contactData.contact_email" required>
+
+        </label>
+        <label class="item item-input item-stacked-label margin-top10">
+          <span class="input-label">Message</span>
+          <textarea ng-model="contactData.contact_message"  rows="10" required></textarea>
+        </label>
+        <div class="item transparent">
+          <button class="button button-block button-small button-energized" type="submit" ng-disabled="contact-form.$error" ng-click="send()">
+            SUBMIT
+          </button>
+        </div>
+      </div>
+    </form>
+  </ion-content>
+</ion-modal-view>

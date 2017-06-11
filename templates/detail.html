@@ -1,0 +1,241 @@
+<ion-view>
+     <ion-nav-buttons side="left">
+      <img src="img/sideicon.png">
+      <button ng-click="$ionicGoBack()" class="button back-button button-clear leftarrow">
+           <i class="icon ion-ios-arrow-back"></i>
+        </button>
+<!--       <button class="button back-button button-clear leftarrow" menu-toggle="left">
+           <i class="icon ion-ios-arrow-back"></i>
+        </button>-->
+<!--        <ion-nav-back-button>
+  </ion-nav-back-button>-->
+  </ion-nav-buttons>
+    <ion-nav-buttons side="right" class="leftnav">
+        <a href="#/app/locations" class="mapnavbutton listicon">
+            <i class="fa fa-heart-o btnicons l_icon"></i>
+        </a>
+        <a href="#/app/filter" ng-click="showAlert()" class="button button-icon button-clear mapnavbutton">
+           <i class="fa fa-map-marker btnicons l_icon"></i>
+        </a>
+      </ion-nav-buttons>
+<!--  <ion-nav-title class="font-small searchbar">
+      <label class="item item-input searchlabel">
+        <i class="icon ion-search placeholder-icon searchicon"></i>
+   <input type="text" placeholder="Search" ng-model="searchText"><a href="#/app/search/search/{{searchText}}" class="search_item locationsearch"><i class="fa fa-location-arrow placeholder-icon locationicon"></i></a>
+      </label>
+  </ion-nav-title>-->
+    <ion-content id="Detail">
+        <ion-list>
+            <ion-item class="item-divider">
+                <p class="detailTitle">{{detail.listing_name}}</p>
+<!--                <div class="switch">
+                    <a ng-click="showMap()"
+                       class="button button-stable"
+                       ng-class="{'button-clear':mode.switchTo}">
+                        MAP
+                    </a>
+                    <a ng-click="showDirections()"
+                       class="button button-stable"
+                       ng-class="{'button-clear':!mode.switchTo}">
+                        DIRECTIONS
+                    </a>
+                </div>-->
+            </ion-item>
+            <ion-item  class="map-container" ng-show="mode.switchTo">
+                <div>
+                    <img class="listing-image" ng-src="{{detail.listing_image_thumbnail_url}}" width="100%">
+                </div>
+
+            </ion-item>
+            <ion-item ng-show="mode.switchTo">
+                <h2>
+                    <div style="float: left;position: relative; margin-right: 65px;font-size: 25px;">
+                        <div class="rating" ng-class="{hover:detail.listing_ratings >= 0.5}">
+                            <span class="span">☆</span>
+                        </div>
+                        <div class="rating" ng-class="{hover:detail.listing_ratings >= 1.5}">
+                            <span class="span">☆</span>
+                        </div>
+                        <div class="rating" ng-class="{hover:detail.listing_ratings >= 2.5}">
+                            <span class="span">☆</span>
+                        </div>
+                        <div class="rating" ng-class="{hover:detail.listing_ratings >= 3.5}">
+                            <span class="span">☆</span>
+                        </div>
+                        <div class="rating" ng-class="{hover:detail.listing_ratings >= 4.5}">
+                            <span class="span">☆</span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </h2>
+                <div class="socialicons" ng-show="detail.tripcard_savings !== '0'">
+                    <a href="#" class="socialbtn fb"><i class="fa fa-facebook icn"></i></a>
+                    <a href="#" class="socialbtn pin"><i class="fa fa-pinterest icn"></i></a>
+                    <a href="#" class="socialbtn cam"><i class="fa fa-camera-retro icn"></i></a>
+                    <a href="#" class="socialbtn tt"><i class="fa fa-twitter icn"></i></a>
+                    <a href="#" class="socialbtn lin"><i class="fa fa-linkedin icn"></i></a>
+                    <a href="#" class="socialbtn gpl"><i class="fa fa-google-plus icn"></i></a>
+                    
+                </div>
+            </ion-item>
+            <ion-item ng-show="mode.switchTo">
+            <h2>{{detail.listing_name}}</h2>
+        <div href="tel:listing.listing_phone"  ng-hide="!detail.listing_phone"><span class="phonenum">{{detail.listing_phone}}</span></div>
+        <p class="mm">{{!listing.mile_marker ? "" : 'MM '+listing.mile_marker}} <span>Mile marker {{detail.listing_distance | formatDistance}} - {{detail.mile_marker_orientation}}</span></p>
+        <p class="addr-height"><span class="addr" ng-show="detail.proximity_location > 0">{{detail.city}}, {{detail.state}}, {{detail.zip}}</span>
+            <span class="addr" ng-show="detail.proximity_location == 0">{{listing.address}}, {{!listing.address2 ? "" : listing.address2+', ' }} <br/> {{detail.city}}, {{detail.state}}, {{detail.zip}}</span></p>
+        <!--<div ng-hide="!listing.website"  ng-click="window.open(detail.website, '_blank', 'location=no')"><span class="phonetext website">Visit Website</span> <i class="fa fa-chevron-circle-right websitearrow"></i></div>-->
+            </ion-item>
+            <ion-item class="item-stable item-icon-left accordianitems"ng-click="toggleGroup(detail.description)"ng-class="{active: isGroupShown(detail)}" ng-show="mode.switchTo && detail.description">
+              <i class="icon ion-information-circled" style="align-items: baseline; top: 10px;"></i>
+                <h2>detail <i class="fa acc_icon" ng-class="isGroupShown(detail.description) ? 'fa-chevron-up' : 'fa-chevron-down'"></i></h2>
+          </ion-item>
+            <ion-item class="item-accordion item-icon-left" ng-show="isGroupShown(detail.description)">
+            <p style="text-transform: uppercase;text-align: justify;">
+                    {{detail.description}}
+                </p>
+          </ion-item>
+<!--            <ion-item class="item-icon-left" ng-show="mode.switchTo && detail.description">
+                <i class="icon ion-information-circled" style="align-items: baseline; top: 10px;"></i>
+                <h2>detail</h2>
+                <p style="text-transform: uppercase;text-align: justify;">
+                    {{detail.description}}
+                </p>
+            </ion-item>-->
+
+                <ion-item class="item-stable item-icon-left accordianitems"ng-click="toggleGroup(detail.tripcard_savings)"ng-class="{active: isGroupShown(detail)}" ng-show="mode.switchTo && detail.tripcard_savings">
+              <i class="icon ion-card" style="align-items: baseline; top: 10px;"></i>
+                <h2>tripcard savings <i class="fa acc_icon" ng-class="isGroupShown(detail.tripcard_savings) ? 'fa-chevron-up' : 'fa-chevron-down'"></i></h2>
+          </ion-item>
+            <ion-item class="item-accordion item-icon-left" ng-show="isGroupShown(detail.tripcard_savings)">
+            <li ng-repeat="tcard in detail.listing_tripcard_discounts">
+                    <p style="text-transform: uppercase;" class="energized">
+                        <span class="item-header-title">{{tcard.title}}</span> <span>{{tcard.subtitle}}</span><br/>
+                        <span>{{tcard.description}}</span><br/>
+                        <span ng-if="tcard.ends" class="item-tcard-ends">{{tcard.ends}}</span>
+                    </p> 
+                </li>
+          </ion-item>
+ <ion-item class="item-stable item-icon-left accordianitems"ng-click="toggleGroup(detail.listing_events)"ng-class="{active: isGroupShown(detail)}" ng-show="mode.switchTo">
+               <i class="icon fa fa-calendar" style="align-items: baseline; top: 10px;"></i>
+                <h2>events and promotion <i class="fa acc_icon" ng-class="isGroupShown(detail.listing_events) ? 'fa-chevron-up' : 'fa-chevron-down'"></i></h2>
+          </ion-item>
+            <ion-item class="item-accordion item-icon-left" ng-show="isGroupShown(detail.listing_events)">
+            <li ng-repeat="evt in detail.listing_events">
+                    <p style="text-transform: uppercase;" class="energized">
+                        <span class="item-header-title">{{evt.title}}</span> <span>{{evt.subtitle}}</span><br/>
+                        <span>{{evt.description}}</span><br/>
+                        <span ng-if="evt.ends" class="item-tcard-ends">{{evt.ends}}</span>
+                    </p> 
+                </li>
+          </ion-item>
+        <ion-item class="item-stable item-icon-left accordianitems"ng-click="openGallery(detail.listing_images)" ng-show="mode.switchTo">
+               <i class="icon ion-images" style="align-items: baseline; top: 10px;"></i>
+                <h2>Gallery <i class="fa fa-chevron-down acc_icon"></i></h2>
+          </ion-item>
+<ion-item class="item-stable item-icon-left accordianitems"ng-click="shareLocation()" ng-show="mode.switchTo">
+               <i class="icon ion-forward" style="align-items: baseline; top: 10px;"></i>
+                <h2>share <i class="fa fa-chevron-down acc_icon"></i></h2>
+          </ion-item>
+<ion-item class="item-stable item-icon-left accordianitems"ng-click="addReview(detail)" ng-show="mode.switchTo">
+               <i class="icon ion-edit" style="align-items: baseline; top: 10px;"></i>
+                <h2>add a review <i class="fa fa-chevron-down acc_icon"></i></h2>
+          </ion-item>
+<ion-item class="item-stable item-icon-left accordianitems"ng-click="getReviews(detail.id)" ng-show="mode.switchTo && detail.listing_reviews_total">
+               <i class="icon ion-chatbubbles" style="align-items: baseline; top: 10px;"></i>
+                <h2>read all reviews
+<!--                    <div style="float: right;position: relative; margin-right: 65px;">
+                        <div class="rating" ng-class="{hover:detail.listing_ratings >= 0.5}">
+                            <span class="span">☆</span>
+                        </div>
+                        <div class="rating" ng-class="{hover:detail.listing_ratings >= 1.5}">
+                            <span class="span">☆</span>
+                        </div>
+                        <div class="rating" ng-class="{hover:detail.listing_ratings >= 2.5}">
+                            <span class="span">☆</span>
+                        </div>
+                        <div class="rating" ng-class="{hover:detail.listing_ratings >= 3.5}">
+                            <span class="span">☆</span>
+                        </div>
+                        <div class="rating" ng-class="{hover:detail.listing_ratings >= 4.5}">
+                            <span class="span">☆</span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>-->
+                 <i class="fa fa-chevron-down acc_icon"></i></h2>
+          </ion-item>
+<!--            <a class="item item-icon-left item-icon-right" ng-click="getReviews(detail.id)" ng-show="mode.switchTo && detail.listing_reviews_total">
+                <i class="icon ion-chatbubbles" style="align-items: baseline; top: 10px;"></i>
+                <h2>read all reviews
+                    <div style="float: right;position: relative; margin-right: 65px;">
+                        <div class="rating" ng-class="{hover:detail.listing_ratings >= 0.5}">
+                            <span class="span">☆</span>
+                        </div>
+                        <div class="rating" ng-class="{hover:detail.listing_ratings >= 1.5}">
+                            <span class="span">☆</span>
+                        </div>
+                        <div class="rating" ng-class="{hover:detail.listing_ratings >= 2.5}">
+                            <span class="span">☆</span>
+                        </div>
+                        <div class="rating" ng-class="{hover:detail.listing_ratings >= 3.5}">
+                            <span class="span">☆</span>
+                        </div>
+                        <div class="rating" ng-class="{hover:detail.listing_ratings >= 4.5}">
+                            <span class="span">☆</span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </h2>
+
+                <span class="badge badge-light custom-badge">{{ !detail.listing_reviews_total ? '0' : detail.listing_reviews_total }} reviews</span>
+                <i class="icon ion-chevron-right gray"></i>
+            </a>-->
+
+            <!--            <ion-item class="map-container" ng-show="!mode.switchTo">
+                            <div id="map2" data-tap-disabled="true">
+                                <map zoom="13" center="{{detail.google_latitude}}, {{detail.google_longitude}}" disable-default-u-i="true">
+                                    <directions
+                                        draggable="true"
+                                        panel="directions-panel"
+                                        travel-mode="DRIVING"
+                                        origin="{{position.coords.latitude}},{{position.coords.longitude}}"
+                                        destination="{{detail.google_latitude}}, {{detail.google_longitude}}">
+                                    </directions>
+                                </map>
+                            </div>
+                        </ion-item>-->
+<!--            <ion-item id="" class="map-container" ng-show="!mode.switchTo">
+                
+                <div id="map2" class="map" data-tap-disabled="true">
+                    <map zoom="13" center="{{detail.google_latitude}}, {{detail.google_longitude}}" disable-default-u-i="true">
+                        <directions
+                            draggable="true"
+                            panel="directions-panel"
+                            travel-mode="DRIVING"
+                            origin="{{position.coords.latitude}},{{position.coords.longitude}}"
+                            destination="{{detail.google_latitude}}, {{detail.google_longitude}}">
+                        </directions>
+                    </map>
+                </div>
+            </ion-item>
+
+            <ion-item ng-show="!mode.switchTo">
+                <div id="directions-panel"></div>
+            </ion-item>-->
+        </ion-list>
+    </ion-content>
+
+
+
+    <!--    <div id="map-view" data-tap-disabled="true">
+          <map center="[{{position.coords.latitude}},{{position.coords.longitude}}]" zoom="13" disable-default-u-i="true" zoom-to-include-markers="true">
+            <marker ng-repeat="listing in listings" position="{{::listing.google_latitude}},{{::listing.google_longitude}}" on-click="showInfoWindow(event, listing)" ng-if="listing.proximity_location === '0'">
+            </marker>
+            <shape name="circle" ng-repeat="listing in listings" stroke-color="#f38421" stroke-opacity="1" stroke-weight="2" fill-color="#f38421" fill-opacity="0.0" center="{{::listing.google_latitude}},{{::listing.google_longitude}}" radius="{{getRadius(listing.proximity_location,listing.listing_distance)}}" ng-if="listing.proximity_location !== '0'">
+            </shape>
+          </map>
+        </div>-->
+    <div class="bar bar-footer bar-balanced footr">
+    <img src="img/voucher.jpg" width="100%"/>
+</div>
+</ion-view>

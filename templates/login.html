@@ -1,0 +1,48 @@
+<ion-modal-view id="Login">
+
+  <ion-header-bar class="bar-balanced">
+    <div class="buttons">
+      <img src="img/sideicon.png">
+    </div>
+    <h1 class="title font-small">Login</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closeLogin()">Close</button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <form name="login-form" ng-submit="doLogin()" novalidate>
+
+       <div class="list list-inset login-input">
+        <div class="item">
+          <!--<p class="text-center">Already a member? Sign in Now...</p>-->
+        </div>
+        <label class="item item-input" ng-class="{error:login-form.username.$error.required}">
+          <i class="icon ion-ios-person placeholder-icon"></i>
+          <input name="username" type="text" placeholder="username" ng-model="loginData.username" required="">
+        </label>
+          <label class="item item-input" ng-class="{error:login-form.password.$error.required}">
+          <i class="icon ion-ios-unlocked placeholder-icon"></i>
+          <input name="password" type="password" placeholder="password" ng-model="loginData.password" required="">
+        </label>
+          <div class="item">
+          <button class="button button-clear button-stable btn-forget" type="button" ng-click="openPopover()">Forgot Password?</button>
+          <input class="button button-block button-energized" type="submit" ng-disabled="login-form.username.$error.required || login-form.password.$error.required" value="Login"/>
+        </div>
+      </div>
+    </form>
+      
+    <ul class="list list-inset">
+      <li class="item">
+        <p class="text-center">Not a member</p>
+      </li>
+      <li class="item">
+        <p class="text-center">Want to start saving money <br/>everywhere in the Keys?</p>
+      </li>
+      <li class="item">
+        <button class="button button-block button-energized">
+          Get my TripCard Immediately!
+        </button>
+      </li>
+    </ul>
+  </ion-content>
+</ion-modal-view>

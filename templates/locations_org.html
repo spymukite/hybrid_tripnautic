@@ -1,0 +1,20 @@
+<ion-view>
+  <ion-nav-title class="font-small">
+    The Florida Keys
+  </ion-nav-title>
+  <ion-content id="Locations">
+    <ion-list>
+      <label class="item item-input">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder="Search Business Name" ng-model="searchText"><a href="#/app/search/search/{{searchText}}" class="search_item"><i class="fa fa-play search-arrow"></i></a>
+      </label>
+      <ion-item class="item-thumbnail-left item-icon-right" ng-repeat="location in locations" href="#/app/locations/{{location.id}}">
+        <img ng-src="{{serviceUrl}}/uploads/locations/{{location.id}}/{{location.mobile_icon_url}}">
+
+        <h2>{{location.city}}</h2>
+        <span class="badge badge-balanced">{{location.total_listings}}</span>
+        <i class="icon ion-chevron-right"></i>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

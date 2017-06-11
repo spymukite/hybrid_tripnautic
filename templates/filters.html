@@ -1,0 +1,211 @@
+<ion-modal-view id="Filter">
+    <img class="anchorIcon" src="img/sideicon.png">
+    <ion-content scroll="false" has-header="false">
+        <ion-slide-box ng-init="disableSwipeHandle('filterSlideHandle')" delegate-handle="filterSlideHandle" show-pager="false">
+            <ion-slide class="full-span">
+                <ion-header-bar class="bar-calm">
+                    <div class="buttons">
+                    </div>
+                    <h1 class="title">Filter</h1>
+                    <div class="buttons">
+                        <button class="button button-icon fa fa-times" ng-click="closeFilter()"></button>
+                    </div>
+                </ion-header-bar>
+                <ion-content class="has-header demo-list-icons">
+        <ion-list type="list-inset">
+            <ion-item class="firstelem">
+                <!--<a class="item item-icon-left" href="#">-->
+                Distance
+                <input type="range">
+<!--                <div class="item range ranger">
+                    <i class="icon ion-volume-low"></i>
+                    <input type="range" name="volume">
+                    <i class="icon ion-volume-high"></i>
+                </div>-->
+                <!--</a>-->
+            </ion-item>
+            <ion-item>
+                <!--<a class="item item-icon-left" href="#">-->
+                Location
+
+                <a href="#" ng-click="showLocations()"  class="filter_items filter-link">All <i class="fa fa-chevron-circle-right"></i></a>
+                <!--</a>-->
+            </ion-item>
+            <ion-item>
+                <!--<a class="item item-icon-left" href="#">-->
+                Category
+                <a href="#" ng-click="showCategories()" class="filter_items filter-link">All <i class="fa fa-chevron-circle-right"></i></a>
+                <!--</a>-->
+            </ion-item>
+            <ion-item>
+                <!--<a class="item item-icon-left" href="#">-->
+                Listing with vouchers only
+                <label class="toggle toggle-assertive filter_items">
+                    <input type="checkbox">
+                    <div class="track">
+                        <div class="handle"></div>
+                    </div>
+                </label>
+                <!--</a>-->
+            </ion-item>
+            <ion-item>
+                <!--<a class="item item-icon-left" href="#">-->
+                listings found
+                <span class="filter_items">0</span>
+                <!--</a>-->
+            </ion-item>
+            <!--    <ion-item>Super Metroid</ion-item>
+                <ion-item>Mega Man X</ion-item>
+                <ion-item>The Legend of Zelda</ion-item>
+                <ion-item>Pac-Man</ion-item>
+                <ion-item>Super Mario World</ion-item>
+                <ion-item>Street Fighter II</ion-item>
+                <ion-item>Half Life</ion-item>
+                <ion-item>Final Fantasy VII</ion-item>
+                <ion-item>Star Fox</ion-item>
+                <ion-item>Tetris</ion-item>
+                <ion-item>Donkey Kong III</ion-item>-->
+        </ion-list>
+                    <div class="row">
+                        <div class="col col-50">
+                            <button class="button button-calm button-block button-small" ng-click="applyFilter()">Apply Filters</button>
+                        </div>
+                        <div class="col col-50">
+                            <button class="button button-calm button-block button-small" ng-click="clearFilter()">Clear Filters</button>
+                        </div>
+                    </div>
+    </ion-content>
+            </ion-slide>
+            <ion-slide class="full-span">
+               
+                 <ion-header-bar class="bar-calm">
+                    <div class="buttons">
+                        <button class="button button-icon fa fa-chevron-left" ng-click="goBack()">Categories</button>
+                    </div>
+                </ion-header-bar>
+                <ion-content>
+                    <ion-list>
+                        <ion-item ng-repeat="cateogry in categories" ng-click="subCategories(cateogry.title)">
+                            {{cateogry.title}}
+                        </ion-item>
+                    </ion-list>
+                    <div class="row">
+                        <div class="col col-50">
+                            <button class="button button-calm button-block button-small" ng-click="applyFilter()">Apply Filters</button>
+                        </div>
+                        <div class="col col-50">
+                            <button class="button button-calm button-block button-small" ng-click="clearFilter()">Clear Filters</button>
+                        </div>
+                    </div>
+                </ion-content>
+            </ion-slide>
+            
+            
+            <ion-slide class="full-span">
+               <ion-header-bar class="bar-calm">
+                    <div class="buttons">
+                        <button class="button button-icon fa fa-chevron-left" ng-click="goBack(index)">{{categoryTitle}}</button>
+                    </div>
+                </ion-header-bar>>
+                <ion-content>
+                    <ion-list>
+                        <ion-item ng-repeat="subCategory in subCategories" ng-click="showAttributes(subCategory.title)">
+                            {{subCategory.title}}
+                        </ion-item>
+                    </ion-list>
+                    <div class="row">
+                        <div class="col col-50">
+                            <button class="button button-calm button-block button-small" ng-click="applyFilter()">Apply Filters</button>
+                        </div>
+                        <div class="col col-50">
+                            <button class="button button-calm button-block button-small" ng-click="clearFilter()">Clear Filters</button>
+                        </div>
+                    </div>
+                </ion-content>
+            </ion-slide>
+            
+            <ion-slide class="full-span">
+                <ion-header-bar class="bar-calm">
+                    <div class="buttons">
+                        <button class="button button-icon fa fa-chevron-left" ng-click="goBack()">{{subCategoryTitle}}</button>
+                    </div>
+                </ion-header-bar>
+                <ion-content>
+                    <ion-list>
+                        <ion-item class="item-icon-right" ng-repeat="attribute in attributes" ng-click="attribute.selected = !attribute.selected">
+                            {{attribute.title}}
+                            <i class="icon fa fa-check" ng-show="attribute.selected"></i>
+                        </ion-item>
+                    </ion-list>
+                </ion-content>
+            </ion-slide>
+            <ion-slide class="full-span">
+               
+                 <ion-header-bar class="bar-calm">
+                    <div class="buttons">
+                        <button class="button button-icon fa fa-chevron-left" ng-click="goBackmenu()">Locations</button>
+                    </div>
+                </ion-header-bar>
+                <ion-content>
+                    <ion-list>
+                        <ion-item ng-repeat="location in locations" ng-click="location.selected = !location.selected">
+                            {{location.listing_name}}
+                        </ion-item>
+                    </ion-list>
+                    <div class="row">
+                        <div class="col col-50">
+                            <button class="button button-calm button-block button-small" ng-click="applyFilter()">Apply Filters</button>
+                        </div>
+                        <div class="col col-50">
+                            <button class="button button-calm button-block button-small" ng-click="clearFilter()">Clear Filters</button>
+                        </div>
+                    </div>
+                </ion-content>
+            </ion-slide>
+        </ion-slide-box>
+    </ion-content>
+
+</ion-modal-view>
+
+
+<!--<div class="box-wrapper checked">
+    <h2 class="heading sub running-lightBlue">Joining players</h2>
+
+    <input id="tab1" type="radio" class="tabs" name="tabs" checked="">
+    <label for="tab1" class="tabtitle" style="border-bottom: 1px solid #514f50;">Players</label>
+    <input id="tab2" type="radio" class="tabs" name="tabs">
+    <label for="tab2" class="tabtitle">Comments</label>
+   
+    <div class="tab_content" id="content2">                      
+        <textarea col="5" rows="5" style=""></textarea>
+     
+        <div style="
+             
+             "> <h2 style="
+               
+               ">PLAYER NAME1</h2>
+            <h4 style="
+                color: #909090;
+                ">Is this a common one</h4>   </div>
+        <div style="
+             padding: 15px 0px;
+             border-bottom: #514F50 1px dashed;
+             "> <h2>PLAYER NAME1</h2>
+            <h4 style="
+                color: #888;
+                ">Is this a common one</h4>   </div>
+        <div style="
+             padding: 15px 0px;
+             border-bottom: #514F50 1px dashed;
+             "> <h2>PLAYER NAME1</h2>
+            <h4 style="
+                color: #888;
+                ">Is this a common one</h4>   </div>
+        <div style="
+             padding: 15px 0px;
+             /* border-bottom: #514F50 1px dashed; */
+             "> <h2>PLAYER NAME1</h2>
+            <h4 style="
+                color: #888;
+                ">Is this a common one</h4>   </div></div>
+</div>-->

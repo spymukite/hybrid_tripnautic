@@ -1,0 +1,23 @@
+<ion-view view-title="" id="MapView">
+  <ion-content scroll="false">
+    <ion-list>
+      <ion-item class="item-divider">
+        <div class="row">
+          <div class="col">
+            <button class="button button-stable button-outline button-block" ng-click="loadMoreData()">
+              LOAD MORE RESULTS
+            </button>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+    <div id="map-view" data-tap-disabled="true">
+      <map center="[{{position.coords.latitude}},{{position.coords.longitude}}]" zoom="13" disable-default-u-i="true" zoom-to-include-markers="true">
+        <marker ng-repeat="listing in listings" position="{{::listing.google_latitude}},{{::listing.google_longitude}}" on-click="showInfoWindow(event, listing)" ng-if="listing.proximity_location === '0'">
+        </marker>
+        <shape name="circle" ng-repeat="listing in listings" stroke-color="#f38421" stroke-opacity="1" stroke-weight="2" fill-color="#f38421" fill-opacity="0.0" center="{{::listing.google_latitude}},{{::listing.google_longitude}}" radius="{{getRadius(listing.proximity_location,listing.listing_distance)}}" ng-if="listing.proximity_location !== '0'">
+        </shape>
+      </map>
+    </div>
+  </ion-content>
+</ion-view>

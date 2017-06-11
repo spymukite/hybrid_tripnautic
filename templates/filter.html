@@ -1,0 +1,160 @@
+<ion-view>
+    <ion-nav-buttons side="left">
+        <img src="img/sideicon.png">
+        <button class="button back-button button-clear leftarrow" menu-toggle="left">
+            <i class="icon ion-ios-arrow-back"></i>
+        </button>
+        <!--    <button menu-toggle="right" id="filterBtn" class="button button-calm" ng-click="filter()">
+              Filters
+            </button>-->
+    </ion-nav-buttons>
+    <!--    <ion-nav-buttons side="right" class="leftnav">
+            <button class="button button-icon button-clear ion-navicon mapnavbutton" menu-toggle="left">
+            </button>
+            <button class="button button-icon button-clear mapnavbutton" menu-toggle="left">
+                Filter
+            </button>
+            <span></span>
+        </ion-nav-buttons>-->
+    <!--    <ion-nav-buttons side="right">
+            <img src="img/sideicon.png">
+            </button>
+          </ion-nav-buttons>-->
+    <ion-nav-title class="font-small searchbar filtertext">
+      <label class="item item-input searchlabel">
+        <i class="icon ion-search placeholder-icon searchicon"></i>
+   <input type="text" placeholder="Search" ng-model="searchText"><a href="#/app/search/search/{{searchText}}" class="search_item locationsearch"><i class="fa fa-location-arrow placeholder-icon locationicon"></i></a>
+      </label>
+  </ion-nav-title>
+    <!--    <ion-content id="Locations">
+            <ion-list inset>
+                <ion-list-header>
+                    Action
+                </ion-list-header>
+                <ion-item>Terminator II</ion-item>
+                <ion-item>The Empire Strikes Back</ion-item>
+                <ion-item>Blade Runner</ion-item>
+            </ion-list>
+                    <div class="list">
+            
+                        <a class="item item-icon-left" href="#">
+                            Distance
+                            <div class="item range range-positive ranger">
+                                <i class="icon ion-ios-sunny-outline"></i>
+                                <input type="range" name="volume" min="0" max="100" value="33">
+                                <i class="icon ion-ios-sunny"></i>
+                            </div>
+                        </a>
+            
+                        <a class="item item-icon-left item-icon-right" href="#">
+            
+                            Location
+                        </a>
+            
+                        <a class="item item-icon-left" href="#">
+            
+                            Category
+                            <span class="item-note">
+                                Grammy
+                            </span>
+                        </a>
+            
+                        <a class="item item-icon-left" href="#">
+                            Listing with vouchers only
+                            <label class="toggle toggle-assertive">
+                                <input type="checkbox">
+                                <div class="track">
+                                    <div class="handle"></div>
+                                </div>
+                            </label>
+                        </a>
+                        <a class="item item-icon-left" href="#">
+                            Listings found
+                            <span class="badge badge-assertive">0</span>
+                        </a>
+            
+                    </div>
+    
+                  <div id="map-view" data-tap-disabled="true">
+                  <map center="[{{position.coords.latitude}},{{position.coords.longitude}}]" zoom="13" disable-default-u-i="true" zoom-to-include-markers="true" class="mapview">
+                    <marker ng-repeat="listing in listings" position="{{::listing.google_latitude}},{{::listing.google_longitude}}" on-click="showInfoWindow(event, listing)" ng-if="listing.proximity_location === '0'">
+                    </marker>
+                    <shape name="circle" ng-repeat="listing in listings" stroke-color="#f38421" stroke-opacity="1" stroke-weight="2" fill-color="#f38421" fill-opacity="0.0" center="{{::listing.google_latitude}},{{::listing.google_longitude}}" radius="{{getRadius(listing.proximity_location,listing.listing_distance)}}" ng-if="listing.proximity_location !== '0'">
+                    </shape>
+                  </map>
+                </div>
+                <ion-list>
+                  <ion-item class="item-thumbnail-left item-icon-right" ng-repeat="location in locations" href="#/app/locations/{{location.id}}">
+                    <img ng-src="{{serviceUrl}}/uploads/locations/{{location.id}}/{{location.mobile_icon_url}}">
+            
+                    <h2>{{location.city}}</h2>
+                    <span class="badge badge-balanced">{{location.total_listings}}</span>
+                    <i class="icon ion-chevron-right"></i>
+                  </ion-item>
+                </ion-list>
+        </ion-content>-->
+    <ion-content class="has-header demo-list-icons">
+        <ion-list type="list-inset">
+            <ion-item class="firstelem">
+                <!--<a class="item item-icon-left" href="#">-->
+                Distance
+                <div class="item range ranger">
+                    <!--<i class="icon ion-volume-low"></i>-->
+                    <input type="range" name="volume">
+                    <!--<i class="icon ion-volume-high"></i>-->
+                </div>
+                <!--</a>-->
+            </ion-item>
+            <ion-item>
+                <!--<a class="item item-icon-left" href="#">-->
+                Location
+
+                <a href="#" ng-click="showAlert()" class="filter_items filter-link">Please select <i class="fa fa-chevron-circle-right"></i></a>
+                <!--</a>-->
+            </ion-item>
+            <ion-item>
+                <!--<a class="item item-icon-left" href="#">-->
+                Category
+                <a href="#" ng-click="showAlert()" class="filter_items filter-link">Please select <i class="fa fa-chevron-circle-right"></i></a>
+                <!--</a>-->
+            </ion-item>
+            <ion-item>
+                <!--<a class="item item-icon-left" href="#">-->
+                Listing with vouchers only
+                <label class="toggle toggle-assertive filter_items">
+                    <input type="checkbox">
+                    <div class="track">
+                        <div class="handle"></div>
+                    </div>
+                </label>
+                <!--</a>-->
+            </ion-item>
+            <ion-item>
+                <!--<a class="item item-icon-left" href="#">-->
+                listings found
+                <span class="filter_items">0</span>
+                <!--</a>-->
+            </ion-item>
+            <!--    <ion-item>Super Metroid</ion-item>
+                <ion-item>Mega Man X</ion-item>
+                <ion-item>The Legend of Zelda</ion-item>
+                <ion-item>Pac-Man</ion-item>
+                <ion-item>Super Mario World</ion-item>
+                <ion-item>Street Fighter II</ion-item>
+                <ion-item>Half Life</ion-item>
+                <ion-item>Final Fantasy VII</ion-item>
+                <ion-item>Star Fox</ion-item>
+                <ion-item>Tetris</ion-item>
+                <ion-item>Donkey Kong III</ion-item>-->
+        </ion-list>
+        <div class="btnlist">
+            <a href="#" class="butn"><i class="fa fa-map-marker btnicons"></i> View Map</a>
+        <a href="#" class="butn"><i class="fa fa-bars btnicons"></i> View List</a>
+        </div>
+    </ion-content>
+
+    
+<div class="bar bar-footer bar-balanced footr">
+    <img src="img/voucher.jpg" width="100%"/>
+</div>
+</ion-view>
